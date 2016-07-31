@@ -4,10 +4,10 @@ USE cinema;
 
 CREATE TABLE filmes (
 	titulo VARCHAR(50),
-    categoria VARCHAR(55),
-    duracao INT(5),
-    diretor VARCHAR(100),
-    sinopse TEXT,
+	categoria VARCHAR(55),
+	duracao INT(5),
+	diretor VARCHAR(100),
+	sinopse TEXT,
 	ano INT(4)
 );
 
