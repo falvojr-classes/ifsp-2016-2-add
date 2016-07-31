@@ -13,9 +13,9 @@ CREATE TABLE filmes (
 
 INSERT INTO filmes VALUES 
 	('Pelé', 'Esporte', 128, 'Chavez', NULL, 2000),
-    ('007', 'Ação', 100, 'Fulano', NULL, 2014),
-    ('Mogli, o menino urso', 'Ação', 128, 'André Ursoglini', NULL, 2016),
-    ('Esquadrão Suicida', 'Ação', 128, 'Fulano', NULL, 2016),
-    ('Tarzan', 'Ação', 128, 'André Ursoglini', NULL, 2016);
+	('007', 'Ação', 100, 'Fulano', NULL, 2014),
+	('Mogli, o menino urso', 'Ação', 128, 'André Ursoglini', NULL, 2016),
+	('Esquadrão Suicida', 'Ação', 128, 'Fulano', NULL, 2016),
+	('Tarzan', 'Ação', 128, 'André Ursoglini', NULL, 2016);
 
 SELECT f.titulo, f.duracao, f.ano FROM filmes f;
