@@ -1,4 +1,4 @@
--- 2016-07-28 (Lição 1: Introdução)
+-- 2016-07-28 - Lição 2: Structured Query Language (SQL) com MySQL
 
 CREATE DATABASE IF NOT EXISTS cinema;
 
