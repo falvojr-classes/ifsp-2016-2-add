@@ -1,3 +1,5 @@
+-- 2016-07-28 (Lição 1: Introdução)
+
 ALTER TABLE filmes 
 MODIFY titulo VARCHAR(50) NOT NULL,
 MODIFY categoria VARCHAR(55) NOT NULL,
