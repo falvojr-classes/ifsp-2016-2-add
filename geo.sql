@@ -1,3 +1,5 @@
+-- 2016-08-03 - Lição 2: Structured Query Language (SQL) com MySQL
+
 DROP DATABASE IF EXISTS geo;
 CREATE DATABASE geo;
 USE geo;
