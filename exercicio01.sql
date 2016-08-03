@@ -1,3 +1,5 @@
+-- 2016-07-28 (Lição 1: Introdução)
+
 CREATE DATABASE IF NOT EXISTS cinema;
 
 USE cinema;
