@@ -1,32 +1,32 @@
--- 2016-08-03 - Lição 2: Structured Query Language (SQL) com MySQL
+USE ifspadd;
 
-DROP DATABASE IF EXISTS geo;
-CREATE DATABASE geo;
-USE geo;
-
---
+-- 
 -- Estrutura da tabela tb_estados
---
+-- 
 
 CREATE TABLE tb_estados (
-  id INT(2) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
-  uf VARCHAR(2) NOT NULL DEFAULT '',
-  nome VARCHAR(20) NOT NULL DEFAULT '',
+  id INT(2) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, -- PRIMARY KEY [Opção 1]
+  uf CHAR(2) NOT NULL DEFAULT '',
+  nome VARCHAR(50) NOT NULL DEFAULT '',
   PRIMARY KEY (id)
 );
+
 -- ALTER TABLE tb_estados AUTO_INCREMENT = 1 (desnecessário devido ao DROP)
 
---
+-- 
 -- Estrutura da tabela tb_cidades
---
+-- 
 
 CREATE TABLE tb_cidades (
   id INT(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
   id_estado INT(2) UNSIGNED ZEROFILL NOT NULL,
   nome VARCHAR(50) NOT NULL DEFAULT '',
   PRIMARY KEY (id),
+  CONSTRAINT fk_id_estado -- Opcional para identificar o nome da restrição (constraint)
   FOREIGN KEY (id_estado) REFERENCES tb_estados(id)
 );
+
+
 -- ALTER TABLE tb_cidades AUTO_INCREMENT = 1 (desnecessário devido ao DROP)
 
 -- 
