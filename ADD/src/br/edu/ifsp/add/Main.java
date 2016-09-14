@@ -1,33 +1,26 @@
 package br.edu.ifsp.add;
 
-import br.edu.ifsp.add.util.Robo;
-import br.edu.ifsp.add.util.SingletonPreguicoso;
-import br.edu.ifsp.add.util.StrategyAgressiva;
-import br.edu.ifsp.add.util.StrategyDefensiva;
+import br.edu.ifsp.add.dao.ContatoDao;
+import br.edu.ifsp.add.dao.IContatoDao;
+import br.edu.ifsp.add.model.Contato;
+import java.util.Calendar;
 
 /**
  * Classe de testes.
- * 
+ *
  * @author falvojr
  */
 public class Main {
-    
+
     public static void main(String[] args) {
+        Contato contato = new Contato();
+        contato.setNome("Teste JDBC");
+        contato.setEmail("teste@jdbc.sql.java");
+        contato.setTelefone("(16) 99999-9999");
+        contato.setDataNascimento(Calendar.getInstance());
         
-        //SingletonPreguicoso.getInstancia().teste();
-        //OU
-        //SingletonPreguicoso singleton = SingletonPreguicoso.getInstancia();
-        //singleton.teste();
-        
-        Robo robo = new Robo();
-        robo.movimentar();
-        robo.setStrategy(new StrategyAgressiva());
-        robo.movimentar();
-        
-        robo.setStrategy(new StrategyDefensiva());
-        robo.movimentar();
-        robo.movimentar();
-        robo.movimentar();
+        IContatoDao dao = ContatoDao.getInstancia();
+        dao.inserir(contato);
     }
-    
+
 }

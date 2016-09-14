@@ -18,7 +18,7 @@ public class SingletonPreguicoso {
 
     /**
      * Verifica o estado do atributo, setando sua instância apenas quando a
-     * mesma for realmente ncessária (por demanda).
+     * mesma for realmente necessária (por demanda).
      *
      * @return instância de SingletonPreguicoso.
      */
