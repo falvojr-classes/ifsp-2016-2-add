@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.edu.ifsp.add.model.Contato;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Classe de persistência para a entidade {@link Contato}. Essa classe
@@ -52,20 +55,61 @@ public class ContatoDao implements IContatoDao {
     @Override
     public void alterar(Contato entidade) {
         String sql = "UPDATE contatos SET nome=?, email=?, telefone=?, data_nascimento=? WHERE id=?";
-        //FIXME: Executar o comando de UPDATE via JDBC.
+        try {
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            stmt.setString(1, entidade.getNome());
+            stmt.setString(2, entidade.getEmail());
+            stmt.setString(3, entidade.getTelefone());
+            stmt.setDate(4, new Date(entidade.getDataNascimento().getTimeInMillis()));
+            stmt.setLong(5, entidade.getId());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void deletar(Contato entidade) {
         String sql = "DELETE FROM contatos WHERE id=?";
-        //FIXME: Executar o comando de DELETE via JDBC.
+        try {
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            stmt.setLong(1, entidade.getId());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<Contato> listar() {
+        List<Contato> contatos = new ArrayList<Contato>();
         String sql = "SELECT * FROM contatos";
-        //TODO: Executar o comando de SELECT via JDBC e retornar os resultados.
-        return null;
+        try {
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+               Contato contato = new Contato();
+               contato.setId(rs.getLong("id"));
+               contato.setNome(rs.getString("nome"));
+               contato.setEmail(rs.getString("email")); 
+               contato.setTelefone(rs.getString("telefone"));
+               
+               Calendar calendar = Calendar.getInstance();
+               calendar.setTimeInMillis(rs.getDate("data_nascimento").getTime());
+               contato.setDataNascimento(calendar);
+               
+               contatos.add(contato);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return contatos;
     }
 
 }
+
+

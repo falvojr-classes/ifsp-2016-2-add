@@ -4,6 +4,7 @@ import br.edu.ifsp.add.dao.ContatoDao;
 import br.edu.ifsp.add.dao.IContatoDao;
 import br.edu.ifsp.add.model.Contato;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Classe de testes.
@@ -13,14 +14,35 @@ import java.util.Calendar;
 public class Main {
 
     public static void main(String[] args) {
-        Contato contato = new Contato();
-        contato.setNome("Teste JDBC");
-        contato.setEmail("teste@jdbc.sql.java");
-        contato.setTelefone("(16) 99999-9999");
-        contato.setDataNascimento(Calendar.getInstance());
+        Contato contatoInserir = new Contato();
+        contatoInserir.setEmail("teste@jdbc.sql.java");
+        contatoInserir.setTelefone("(16) 99999-9999");
+        contatoInserir.setDataNascimento(Calendar.getInstance());
         
         IContatoDao dao = ContatoDao.getInstancia();
-        dao.inserir(contato);
+        
+        // Inserção
+        for (int i = 1; i < 10; i++) {
+            contatoInserir.setNome("Contato " + i);
+            dao.inserir(contatoInserir);
+        }
+        
+        // Listagem
+        List<Contato> contatos = dao.listar();
+        for (Contato contato : contatos) {
+            System.out.println(contato.getNome());
+        }
+        
+        // Alteração
+        for (Contato contato : contatos) {
+            contato.setNome(contato.getNome() + " Alterado");
+            dao.alterar(contato);
+        }
+        
+        // Exclusão
+        for (Contato contato : contatos) {
+           dao.deletar(contato);
+        }
     }
 
 }
