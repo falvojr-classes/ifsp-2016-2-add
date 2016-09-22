@@ -1,6 +1,5 @@
 package br.edu.ifsp.add.dao;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,6 +7,7 @@ import java.util.List;
 
 import br.edu.ifsp.add.model.Contato;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -19,7 +19,7 @@ import java.util.Calendar;
  *
  * @since 31/08/2016
  */
-public class ContatoDao implements IContatoDao {
+public class ContatoDao extends BaseDao implements IContatoDao {
 
     private static ContatoDao instancia;
 
@@ -33,19 +33,20 @@ public class ContatoDao implements IContatoDao {
     private ContatoDao() {
         super();
     }
-
-    private final Connection conexao = ConnectionFactory.getInstancia().getConnection();
-
+    
     @Override
     public void inserir(Contato entidade) {
         String sql = "INSERT INTO contatos (nome, email, telefone, data_nascimento) VALUES (?, ?, ?, ?)";
         try {
-            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            PreparedStatement stmt = super.getConexao().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, entidade.getNome());
             stmt.setString(2, entidade.getEmail());
             stmt.setString(3, entidade.getTelefone());
             stmt.setDate(4, new Date(entidade.getDataNascimento().getTimeInMillis()));
             stmt.execute();
+            
+            entidade.setId(super.getChaveGerada(stmt));
+            
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -56,7 +57,7 @@ public class ContatoDao implements IContatoDao {
     public void alterar(Contato entidade) {
         String sql = "UPDATE contatos SET nome=?, email=?, telefone=?, data_nascimento=? WHERE id=?";
         try {
-            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            PreparedStatement stmt = super.getConexao().prepareStatement(sql);
             stmt.setString(1, entidade.getNome());
             stmt.setString(2, entidade.getEmail());
             stmt.setString(3, entidade.getTelefone());
@@ -73,7 +74,7 @@ public class ContatoDao implements IContatoDao {
     public void deletar(Contato entidade) {
         String sql = "DELETE FROM contatos WHERE id=?";
         try {
-            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            PreparedStatement stmt = super.getConexao().prepareStatement(sql);
             stmt.setLong(1, entidade.getId());
             stmt.execute();
             stmt.close();
@@ -87,7 +88,7 @@ public class ContatoDao implements IContatoDao {
         List<Contato> contatos = new ArrayList<Contato>();
         String sql = "SELECT * FROM contatos";
         try {
-            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            PreparedStatement stmt = super.getConexao().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                Contato contato = new Contato();
