@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.edu.ifsp.add.model.Contato;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class ContatoDao extends BaseDao implements IContatoDao {
         }
         return ContatoDao.instancia;
     }
-
+    
     private ContatoDao() {
         super();
     }

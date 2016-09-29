@@ -13,6 +13,7 @@ public class Endereco {
     private String numero;
     private String complemento;
     private String cep;
+    private Contato contato;
 
     public Long getId() {
         return id;
@@ -52,6 +53,14 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public Contato getContato() {
+        return contato;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
     }
     
 }

@@ -17,6 +17,17 @@ CREATE TABLE enderecos (
     cep VARCHAR(10) NOT NULL
 );
 
+ALTER TABLE enderecos
+ADD id_contato INT UNSIGNED NOT NULL,
+ADD CONSTRAINT fk_contato FOREIGN KEY (id_contato) REFERENCES contatos(id);
+
+INSERT INTO contatos (nome, email, telefone, data_nascimento) 
+VALUES ('teste', 'teste@teste', '999999999', '1989-07-10');
+
 SELECT * FROM contatos;
 
-SELECT * FROM enderecos;
+INSERT INTO enderecos (logradouro, numero, complemento, cep, id_contato) 
+VALUES ('teste', '1234', '', '14835-000', 1);
+
+SELECT c.nome FROM contatos c
+JOIN enderecos e ON c.id = e.id_contato
