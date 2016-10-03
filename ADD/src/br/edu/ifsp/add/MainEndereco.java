@@ -30,8 +30,6 @@ public class MainEndereco {
         List<Endereco> enderecos = dao.listar();
         
         dao.deletar(endereco);
-        
-        enderecos = dao.listar();
     }
 
 }

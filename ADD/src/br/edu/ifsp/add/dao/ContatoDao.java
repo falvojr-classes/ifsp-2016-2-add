@@ -6,15 +6,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.edu.ifsp.add.model.Contato;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Classe de persistência para a entidade {@link Contato}. Essa classe
- * implementa os padrões Singleton e Strategy.
+ * Classe de persistência para a entidade Contato. Essa classe implementa os
+ * padrões Singleton e Strategy.
  *
  * @author Venilton FalvoJr
  *
@@ -30,11 +29,11 @@ public class ContatoDao extends BaseDao implements IContatoDao {
         }
         return ContatoDao.instancia;
     }
-    
+
     private ContatoDao() {
         super();
     }
-    
+
     @Override
     public void inserir(Contato entidade) {
         String sql = "INSERT INTO contatos (nome, email, telefone, data_nascimento) VALUES (?, ?, ?, ?)";
@@ -45,9 +44,9 @@ public class ContatoDao extends BaseDao implements IContatoDao {
             stmt.setString(3, entidade.getTelefone());
             stmt.setDate(4, new Date(entidade.getDataNascimento().getTimeInMillis()));
             stmt.execute();
-            
+
             entidade.setId(super.getChaveGerada(stmt));
-            
+
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -91,18 +90,18 @@ public class ContatoDao extends BaseDao implements IContatoDao {
         try {
             PreparedStatement stmt = super.getConexao().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()) {
-               Contato contato = new Contato();
-               contato.setId(rs.getLong("id"));
-               contato.setNome(rs.getString("nome"));
-               contato.setEmail(rs.getString("email")); 
-               contato.setTelefone(rs.getString("telefone"));
-               
-               Calendar calendar = Calendar.getInstance();
-               calendar.setTimeInMillis(rs.getDate("data_nascimento").getTime());
-               contato.setDataNascimento(calendar);
-               
-               contatos.add(contato);
+            while (rs.next()) {
+                Contato contato = new Contato();
+                contato.setId(rs.getLong("id"));
+                contato.setNome(rs.getString("nome"));
+                contato.setEmail(rs.getString("email"));
+                contato.setTelefone(rs.getString("telefone"));
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(rs.getDate("data_nascimento").getTime());
+                contato.setDataNascimento(calendar);
+
+                contatos.add(contato);
             }
             rs.close();
             stmt.close();
@@ -113,5 +112,3 @@ public class ContatoDao extends BaseDao implements IContatoDao {
     }
 
 }
-
-

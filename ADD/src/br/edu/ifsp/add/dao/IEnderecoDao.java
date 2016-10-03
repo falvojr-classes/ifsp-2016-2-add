@@ -4,7 +4,7 @@ import br.edu.ifsp.add.model.Endereco;
 import java.util.List;
 
 /**
- * Strategy utilizada pelo {@link EnderecoDao}.
+ * Strategy utilizada pelo EnderecoDao.
  *
  * @author Venilton FalvoJr
  *

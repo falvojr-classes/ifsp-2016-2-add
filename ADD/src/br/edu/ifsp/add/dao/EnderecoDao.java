@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe de persistência para a entidade {@link Endereco}. Essa classe
- * implementa os padrões Singleton e Strategy.
+ * Classe de persistência para a entidade Endereco. Essa classe implementa os
+ * padrões Singleton e Strategy.
  *
  * @author Venilton FalvoJr
  *
@@ -77,20 +77,20 @@ public class EnderecoDao extends BaseDao implements IEnderecoDao {
         try {
             PreparedStatement stmt = super.getConexao().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()) {
-               //Cria o Endereco:
-               Endereco endereco = new Endereco();
-               //TODO Setar os atributos de Endereco de acordo com o SELECT...
+            while (rs.next()) {
+                //Cria o Endereco:
+                Endereco endereco = new Endereco();
+                //TODO Setar os atributos de Endereco de acordo com o SELECT...
 
-               //Criar o Contato:
-               Contato contato = new Contato();
-               //TODO Setar os atributos de Contato de acordo com o SELECT...
+                //Criar o Contato:
+                Contato contato = new Contato();
+                //TODO Setar os atributos de Contato de acordo com o SELECT...
 
-               //Relaciona Endereço e Contato:
-               endereco.setContato(contato);
+                //Relaciona Endereço e Contato:
+                endereco.setContato(contato);
 
-               //Adiciona na lista de retorno:
-               enderecos.add(endereco);
+                //Adiciona na lista de retorno:
+                enderecos.add(endereco);
             }
             rs.close();
             stmt.close();

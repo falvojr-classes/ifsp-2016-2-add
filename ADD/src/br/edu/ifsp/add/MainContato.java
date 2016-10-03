@@ -9,7 +9,9 @@ import java.util.List;
 /**
  * Classe de testes da entidade Contato.
  *
- * @author falvojr
+ * @author Venilton FalvoJr
+ * 
+ * @since 20/09/2016
  */
 public class MainContato {
 

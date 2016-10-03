@@ -5,7 +5,7 @@ import java.util.List;
 import br.edu.ifsp.add.model.Contato;
 
 /**
- * Strategy utilizada pelo {@link ContatoDao}.
+ * Strategy utilizada pelo ContatoDao.
  *
  * @author Venilton FalvoJr
  *
