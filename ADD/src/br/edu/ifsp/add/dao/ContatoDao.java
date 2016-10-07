@@ -85,7 +85,7 @@ public class ContatoDao extends BaseDao implements IContatoDao {
 
     @Override
     public List<Contato> listar() {
-        List<Contato> contatos = new ArrayList<Contato>();
+        List<Contato> contatos = new ArrayList<>();
         String sql = "SELECT * FROM contatos";
         try {
             PreparedStatement stmt = super.getConexao().prepareStatement(sql);
@@ -111,4 +111,45 @@ public class ContatoDao extends BaseDao implements IContatoDao {
         return contatos;
     }
 
+    @Override
+    public List<String> listarNomesPorCep(String cep) {
+        List<String> contatos = new ArrayList<>();
+        String sql = "SELECT c.nome "
+                + "FROM contatos c "
+                + "JOIN enderecos e ON c.id = e.id_contato "
+                + "WHERE e.cep = ?";
+        try {
+            PreparedStatement stmt = super.getConexao().prepareStatement(sql);
+            stmt.setString(1, cep);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String nome = rs.getString("nome");
+                contatos.add(nome);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return contatos;
+    }
+    
+    @Override
+    public List<String> listarNomes() {
+        List<String> contatos = new ArrayList<>();
+        String sql = "SELECT nome FROM contatos";
+        try {
+            PreparedStatement stmt = super.getConexao().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String nome = rs.getString("nome");
+                contatos.add(nome);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return contatos;
+    }
 }

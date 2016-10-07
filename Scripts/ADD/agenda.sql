@@ -29,5 +29,21 @@ SELECT * FROM contatos;
 INSERT INTO enderecos (logradouro, numero, complemento, cep, id_contato) 
 VALUES ('teste', '1234', '', '14835-000', 1);
 
-SELECT c.nome FROM contatos c
+SELECT
+c.id id_contato,
+c.nome,
+c.email,
+c.telefone,
+c.data_nascimento,
+e.id id_endereco,
+e.logradouro,
+e.numero,
+e.complemento,
+e.cep
+FROM contatos c 
+JOIN enderecos e ON c.id = e.id_contato;
+
+SELECT c.nome
+FROM contatos c 
 JOIN enderecos e ON c.id = e.id_contato
+WHERE e.cep = '14835-000';

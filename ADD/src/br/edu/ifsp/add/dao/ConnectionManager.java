@@ -25,7 +25,6 @@ public final class ConnectionManager {
     }
 
     private ConnectionManager() {
-        super();
         this.conexao = this.newConnection();
     }
 

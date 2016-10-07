@@ -20,4 +20,8 @@ public interface IContatoDao {
     public void deletar(Contato entidade);
 
     public List<Contato> listar();
+    
+    public List<String> listarNomes();
+    
+    public List<String> listarNomesPorCep(String cep);
 }

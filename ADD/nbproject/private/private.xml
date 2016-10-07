@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/model/Endereco.java</file>
-            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/MainContato.java</file>
-            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/model/Contato.java</file>
-            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/dao/EnderecoDao.java</file>
-            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/dao/BaseDao.java</file>
-            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/dao/ContatoDao.java</file>
-            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/MainEndereco.java</file>
-            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/Main.java</file>
+            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/dao/ConnectionManager.java</file>
+            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/dao/ContatoDao.java</file>
+            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/dao/IContatoDao.java</file>
+            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/MainEndereco.java</file>
+            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/dao/EnderecoDao.java</file>
+            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/MainContato.java</file>
+            <file>file:/C:/Users/Aluno/Downloads/ifsp-2016-2-add-master/ifsp-2016-2-add-master/ADD/src/br/edu/ifsp/add/dao/BaseDao.java</file>
         </group>
     </open-files>
 </project-private>

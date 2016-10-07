@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -72,19 +73,32 @@ public class EnderecoDao extends BaseDao implements IEnderecoDao {
 
     @Override
     public List<Endereco> listar() {
-        List<Endereco> enderecos = new ArrayList<Endereco>();
-        String sql = "SEU SELECT COM OS DADOS DE ENDERECO E CONTATO";
+        List<Endereco> enderecos = new ArrayList<>();
+        String sql = "SELECT c.id id_contato, c.nome, c.email, "
+                + "c.telefone, c.data_nascimento, e.id id_endereco, "
+                + "e.logradouro, e.numero, e.complemento, e.cep "
+                + "FROM contatos c JOIN enderecos e ON c.id = e.id_contato";
         try {
             PreparedStatement stmt = super.getConexao().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 //Cria o Endereco:
                 Endereco endereco = new Endereco();
-                //TODO Setar os atributos de Endereco de acordo com o SELECT...
+                endereco.setId(rs.getLong("id_endereco"));
+                endereco.setLogradouro(rs.getString("logradouro"));
+                endereco.setNumero(rs.getString("numero"));
+                endereco.setComplemento(rs.getString("complemento"));
+                endereco.setCep(rs.getString("cep"));
 
                 //Criar o Contato:
                 Contato contato = new Contato();
-                //TODO Setar os atributos de Contato de acordo com o SELECT...
+                contato.setId(rs.getLong("id_contato"));
+                contato.setNome(rs.getString("nome"));
+                contato.setEmail(rs.getString("email"));
+                contato.setTelefone(rs.getString("telefone"));
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(rs.getDate("data_nascimento").getTime());
+                contato.setDataNascimento(calendar);
 
                 //Relaciona Endereço e Contato:
                 endereco.setContato(contato);
