@@ -17,5 +17,18 @@ create table permissao (
 
 -- 1 c)
 alter table usuario
-add id_permissao int not null
+add id_permissao int not null,
 add foreign key(id_permissao) references permissao(id);
+
+-- Insere as pemissões
+insert into permissao (descricao)
+values ('Administrador'),
+	   ('Funcionário'),
+       ('Visitante');
+
+-- Insere um usuário padrão (root)
+insert into usuario (email, senha, id_permissao)
+values ('root@root.com', 'root', 1);
+
+select count(*) from usuario
+where email = 'root@root.com' and senha = 'root';

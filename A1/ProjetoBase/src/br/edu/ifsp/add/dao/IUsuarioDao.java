@@ -16,4 +16,6 @@ public interface IUsuarioDao {
     public void alterar(Usuario usuario);
     
     public Long contarAdministradoresAtivos();
+    
+    public boolean autenticar(Usuario usuario);
 }

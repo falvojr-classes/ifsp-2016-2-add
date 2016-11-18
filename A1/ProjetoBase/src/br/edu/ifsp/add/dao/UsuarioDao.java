@@ -84,4 +84,26 @@ public class UsuarioDao extends BaseDao implements IUsuarioDao {
         return retorno;
     }
 
+    @Override
+    public boolean autenticar(Usuario usuario) {
+        boolean retorno = false;
+        String sql = "select count(*) from usuario where email = ? and senha = ?";
+        try {
+            PreparedStatement stmt = super.getConexao().prepareStatement(sql);
+            stmt.setString(1, usuario.getEmail());
+            stmt.setString(2, usuario.getSenha());
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            Long count = rs.getLong("count(*)");
+            if (count == 1) {
+                retorno = true;
+            }
+            
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return retorno;
+    }
+
 }
