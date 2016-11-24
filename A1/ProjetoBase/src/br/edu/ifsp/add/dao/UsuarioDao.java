@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Classe de persistência para a entidade Usuario. 
- * Essa classe implementa os padrões Singleton e Strategy.
+ * Classe de persistência para a entidade Usuario. Essa classe implementa os
+ * padrões Singleton e Strategy.
  *
  * @author Venilton FalvoJr
  *
@@ -30,22 +30,18 @@ public class UsuarioDao extends BaseDao implements IUsuarioDao {
     }
 
     @Override
-    public void inserir(Usuario usuario) {
+    public void inserir(Usuario usuario) throws SQLException {
         String sql = "INSERT INTO usuario (email, senha, ativo, id_permissao) VALUES (?, ?, ?, ?)";
-        try {
-            PreparedStatement stmt = super.getConexao().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, usuario.getEmail());
-            stmt.setString(2, usuario.getSenha());
-            stmt.setBoolean(3, usuario.isAtivo());
-            stmt.setLong(4, usuario.getPermissao().getId());
-            stmt.execute();
+        PreparedStatement stmt = super.getConexao().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        stmt.setString(1, usuario.getEmail());
+        stmt.setString(2, usuario.getSenha());
+        stmt.setBoolean(3, usuario.isAtivo());
+        stmt.setLong(4, usuario.getPermissao().getId());
+        stmt.execute();
 
-            usuario.setId(super.getChaveGerada(stmt));
+        usuario.setId(super.getChaveGerada(stmt));
 
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        stmt.close();
     }
 
     @Override
@@ -68,15 +64,15 @@ public class UsuarioDao extends BaseDao implements IUsuarioDao {
     @Override
     public Long contarAdministradoresAtivos() {
         Long retorno = 0L;
-        String sql = "select count(*) quantidade from usuario u " +
-            "inner join permissao p on u.id_permissao = p.id " +
-            "where p.id = 1 and u.ativo = 1";
+        String sql = "select count(*) quantidade from usuario u "
+                + "inner join permissao p on u.id_permissao = p.id "
+                + "where p.id = 1 and u.ativo = 1";
         try {
             PreparedStatement stmt = super.getConexao().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             rs.next();
             retorno = rs.getLong("quantidade");
-            
+
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -85,24 +81,19 @@ public class UsuarioDao extends BaseDao implements IUsuarioDao {
     }
 
     @Override
-    public boolean autenticar(Usuario usuario) {
+    public boolean autenticar(Usuario usuario) throws SQLException {
         boolean retorno = false;
         String sql = "select count(*) from usuario where email = ? and senha = ?";
-        try {
-            PreparedStatement stmt = super.getConexao().prepareStatement(sql);
-            stmt.setString(1, usuario.getEmail());
-            stmt.setString(2, usuario.getSenha());
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            Long count = rs.getLong("count(*)");
-            if (count == 1) {
-                retorno = true;
-            }
-            
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        PreparedStatement stmt = super.getConexao().prepareStatement(sql);
+        stmt.setString(1, usuario.getEmail());
+        stmt.setString(2, usuario.getSenha());
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        Long count = rs.getLong("count(*)");
+        if (count == 1) {
+            retorno = true;
         }
+        stmt.close();
         return retorno;
     }
 

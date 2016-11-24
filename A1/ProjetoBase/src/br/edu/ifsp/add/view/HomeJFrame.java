@@ -5,13 +5,17 @@
  */
 package br.edu.ifsp.add.view;
 
-import br.edu.ifsp.add.dao.UsuarioDao;
+import br.edu.ifsp.add.controller.UsuarioController;
 import br.edu.ifsp.add.model.Usuario;
+import br.edu.ifsp.add.util.ExcecaoNegocial;
+import br.edu.ifsp.add.util.Mensagens;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Aluno
+ * Classe responsável pelos elementos visuais do sistema (tela home).
+ * 
+ * @author Venilton FalvoJr
  */
 public class HomeJFrame extends javax.swing.JFrame {
 
@@ -39,13 +43,13 @@ public class HomeJFrame extends javax.swing.JFrame {
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jButtonEntrar = new javax.swing.JButton();
         jPanelCadastro = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        jLabelEmailCadastro = new javax.swing.JLabel();
+        jTextFieldEmailCadastro = new javax.swing.JTextField();
+        jLabelSenhaCadastro = new javax.swing.JLabel();
+        jPasswordFieldSenhaCadastro = new javax.swing.JPasswordField();
+        jLabelConfSenhaCadastro = new javax.swing.JLabel();
+        jPasswordFieldConfSenhaCadastro = new javax.swing.JPasswordField();
+        jButtonCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,16 +99,16 @@ public class HomeJFrame extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Acesso", jPanelAcesso);
 
-        jLabel1.setText("E-mail");
+        jLabelEmailCadastro.setText("E-mail");
 
-        jLabel2.setText("Senha");
+        jLabelSenhaCadastro.setText("Senha");
 
-        jLabel3.setText("Confirmação Senha");
+        jLabelConfSenhaCadastro.setText("Confirmação Senha");
 
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCadastrar.setText("Cadastrar");
+        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCadastrarActionPerformed(evt);
             }
         });
 
@@ -115,35 +119,35 @@ public class HomeJFrame extends javax.swing.JFrame {
             .addGroup(jPanelCadastroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
-                    .addComponent(jPasswordField1)
-                    .addComponent(jPasswordField2)
+                    .addComponent(jTextFieldEmailCadastro)
+                    .addComponent(jPasswordFieldSenhaCadastro)
+                    .addComponent(jPasswordFieldConfSenhaCadastro)
                     .addGroup(jPanelCadastroLayout.createSequentialGroup()
                         .addGroup(jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabelEmailCadastro)
+                            .addComponent(jLabelSenhaCadastro)
+                            .addComponent(jLabelConfSenhaCadastro))
                         .addGap(0, 282, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelCadastroLayout.setVerticalGroup(
             jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCadastroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelEmailCadastro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(jLabelSenhaCadastro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPasswordFieldSenhaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(jLabelConfSenhaCadastro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPasswordFieldConfSenhaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jButtonCadastrar)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
@@ -169,21 +173,39 @@ public class HomeJFrame extends javax.swing.JFrame {
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         // TODO add your handling code here:
         Usuario usuario = new Usuario();
-        usuario.setEmail(jTextFieldEmail.getText());
+        usuario.setEmail(jTextFieldEmail.getText().trim());
         char[] senha = jPasswordFieldSenha.getPassword();
-        usuario.setSenha(new String(senha));
-        
-        boolean autenticado = UsuarioDao.getInstancia().autenticar(usuario);
-        if (autenticado) {
-            JOptionPane.showMessageDialog(this, "Autenticou!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro!", "Mensagem", JOptionPane.ERROR_MESSAGE);
+        usuario.setSenha(new String(senha).trim());
+        try {
+            UsuarioController.getInstancia().autenticar(usuario);
+            JOptionPane.showMessageDialog(this, Mensagens.SUCESSO_AUTENTICACAO,
+                    "Mensagem", JOptionPane.INFORMATION_MESSAGE);
+        } catch (ExcecaoNegocial excecao) {
+            mostrarErro(excecao);
         }
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO Inserir Usuário
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
+        Usuario usuario = new Usuario();
+        usuario.setEmail(jTextFieldEmailCadastro.getText());
+        String senha = new String(jPasswordFieldSenhaCadastro.getPassword());
+        usuario.setSenha(senha);
+        String confirmacaoSenha = new String(jPasswordFieldConfSenhaCadastro.getPassword());
+        usuario.setConfirmacaoSenha(confirmacaoSenha);
+        try {
+            UsuarioController.getInstancia().inserirCadastro(usuario);
+            JOptionPane.showMessageDialog(this, Mensagens.SUCESSO_CADASTRO,
+                    "Mensagem", JOptionPane.INFORMATION_MESSAGE);
+        } catch (ExcecaoNegocial excecao) {
+            mostrarErro(excecao);
+        }
+    }//GEN-LAST:event_jButtonCadastrarActionPerformed
+
+    private void mostrarErro(ExcecaoNegocial excecao) throws HeadlessException {
+        // TODO: Armazenar log.
+        JOptionPane.showMessageDialog(this, excecao.getMessage(),
+                "Mensagem", JOptionPane.ERROR_MESSAGE);
+    }
 
     /**
      * @param args the command line arguments
@@ -221,20 +243,20 @@ public class HomeJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonEntrar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelConfSenhaCadastro;
     private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelEmailCadastro;
     private javax.swing.JLabel jLabelSenha;
+    private javax.swing.JLabel jLabelSenhaCadastro;
     private javax.swing.JPanel jPanelAcesso;
     private javax.swing.JPanel jPanelCadastro;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasswordFieldConfSenhaCadastro;
     private javax.swing.JPasswordField jPasswordFieldSenha;
+    private javax.swing.JPasswordField jPasswordFieldSenhaCadastro;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldEmailCadastro;
     // End of variables declaration//GEN-END:variables
 }

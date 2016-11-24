@@ -14,6 +14,10 @@ public class Usuario {
     private String senha;
     private boolean ativo = true;
     private Permissao permissao;
+    /**
+     * Atributo transiente, ou seja, não será persistido.
+     */
+    private String confirmacaoSenha;
 
     public Long getId() {
         return id;
@@ -53,6 +57,14 @@ public class Usuario {
 
     public void setPermissao(Permissao permissao) {
         this.permissao = permissao;
+    }
+
+    public String getConfirmacaoSenha() {
+        return confirmacaoSenha;
+    }
+
+    public void setConfirmacaoSenha(String confirmacaoSenha) {
+        this.confirmacaoSenha = confirmacaoSenha;
     }
 
 }
