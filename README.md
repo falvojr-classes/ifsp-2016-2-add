@@ -8,5 +8,5 @@
 4. [Data Access Object (DAO) com JDBC](https://docs.google.com/presentation/d/1cmHHzUVQmN6lvKl94R0Mr64A9MQJLuDne65whyJJ0sQ/edit?usp=sharing)
 5. [Gerenciamento de Transações](https://docs.google.com/presentation/d/1sK-As869b_bnXRPEbDwq84h_NCK0OT-u2ydI_vqxQYw/edit?usp=sharing)
 6. [Tratamento de Exceções](https://docs.google.com/presentation/d/1Yi-A3RIPUR3DxtKyobvWNyWRs0tlaX-wpAhYRwWc9_M/edit?usp=sharing)
-7. Interfaces gráficas com Swing
-8. Relatórios com JasperReports
+7. *Interfaces gráficas com Swing (prática)*
+8. *Relatórios com JasperReports (prática)*
